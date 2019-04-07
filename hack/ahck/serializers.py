@@ -83,6 +83,8 @@ class MockSerializer(serializers.ModelSerializer):
     delivery_officer = CustomMockRepresentationDelivery(source='*')
     receiving_officer = CustomMockRepresentetionReciving(source='*')
     inspection_officer = CustomMockRepresentationInspection(source='*')
+    fligths = FlightSerializer(many=True, read_only=True)
+
     class Meta:
         model = Mock
         fields = '__all__'
