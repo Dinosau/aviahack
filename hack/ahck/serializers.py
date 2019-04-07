@@ -11,6 +11,30 @@ class DescriptionJson(serializers.Field):
         return json.loads(value.description_in_json)
 
 
+class CustomMockRepresentetionReciving(serializers.Field):
+    def to_representation(self, value):
+        return value.receiving_officer.username
+    
+    def to_internal_value(self, data):
+        return {"receiving_officer" :SystemUser.objects.get(username=data)}
+
+
+class CustomMockRepresentationDelivery(serializers.Field):
+    def to_representation(self, value):
+        return value.delivery_officer.username
+    
+    def to_internal_value(self, data):
+        return {"delivery_officer": SystemUser.objects.get(username=data)}
+
+
+class CustomMockRepresentationInspection(serializers.Field):
+    def to_representation(self, value):
+        return value.inspection_officer.username
+    
+    def to_internal_value(self, data):
+        return {"inspection_officer": SystemUser.objects.get(username=data)}
+
+
 class PacketSerializer(serializers.ModelSerializer):
     description_in_json = DescriptionJson(source='*')
     class Meta:
@@ -56,6 +80,9 @@ class ActOfShortageSerializer(serializers.ModelSerializer):
 
 
 class MockSerializer(serializers.ModelSerializer):
+    delivery_officer = CustomMockRepresentationDelivery(source='*')
+    receiving_officer = CustomMockRepresentetionReciving(source='*')
+    inspection_officer = CustomMockRepresentationInspection(source='*')
     class Meta:
         model = Mock
         fields = '__all__'
