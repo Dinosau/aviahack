@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from ahck.models import Packet, Cargo, ServiceClass, Flight, SystemUser
+from ahck.models import Packet, Cargo, ServiceClass, Flight, SystemUser, ActOfShortage, Mock
 import json
 
 
@@ -44,4 +44,18 @@ class FlightSerializer(serializers.ModelSerializer):
 class SystemUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = SystemUser
+        fields = '__all__'
+
+
+class ActOfShortageSerializer(serializers.ModelSerializer):
+    flight = FlightSerializer(many=True, read_only=True)
+    description_in_json = DescriptionJson(source='*')
+    class Meta:
+        model = ActOfShortage
+        fields = '__all__'
+
+
+class MockSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Mock
         fields = '__all__'

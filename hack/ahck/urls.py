@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework import  routers
 from .views import (PacketViewSet, CargoViewSet, ServiceClassViewSet, 
-                    FlightViewSet, SystemUserViewSet)
+                    FlightViewSet, SystemUserViewSet, ActOfShortageViewSet, MockViewSet)
 
 
 router = routers.DefaultRouter()
@@ -26,6 +26,8 @@ router.register(r'cargos', CargoViewSet, base_name='cargo')
 router.register(r'service_class', ServiceClassViewSet, base_name='service_class')
 router.register(r'flights', FlightViewSet, base_name='flight')
 router.register(r'systemusers', SystemUserViewSet, base_name='systemuser')
+router.register(r'acts', ActOfShortageViewSet, base_name='act')
+router.register(r'mocks', MockViewSet, base_name='mock')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

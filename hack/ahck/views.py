@@ -1,8 +1,9 @@
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework import viewsets
-from .models import Packet, Cargo, ServiceClass, SystemUser, Flight
-from .serializers import PacketSerializer, CargoSerializer, ServiceClassSerializer, SystemUserSerializer, FlightSerializer
+from .models import Packet, Cargo, ServiceClass, SystemUser, Flight, ActOfShortage, Mock
+from .serializers import (PacketSerializer, CargoSerializer, ServiceClassSerializer, 
+                            SystemUserSerializer, FlightSerializer, ActOfShortageSerializer, MockSerializer)
 
 
 class PacketViewSet(viewsets.ModelViewSet):
@@ -34,3 +35,13 @@ class FlightViewSet(viewsets.ModelViewSet):
 class SystemUserViewSet(viewsets.ModelViewSet):
     serializer_class = SystemUserSerializer
     queryset = SystemUser.objects.all()
+
+
+class ActOfShortageViewSet(viewsets.ModelViewSet):
+    serializer_class = ActOfShortageSerializer
+    queryset = ActOfShortage.objects.all()
+
+
+class MockViewSet(viewsets.ModelViewSet):
+    serializer_class = MockSerializer
+    queryset = Mock.objects.all()
